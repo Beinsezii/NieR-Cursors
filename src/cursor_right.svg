@@ -75,7 +75,7 @@
      id="layer1"
      transform="translate(0,-280.06666)">
     <image
-       xlink:href="cursor_top.svg"
+       xlink:href="cursor.svg"
        y="153.4893"
        x="211.11168"
        preserveAspectRatio="none"

@@ -1,0 +1,7 @@
+Darkest: #49463d
+Dark: #807c6d
+Light: #aea994
+Lightest: #d3cdb5
+
+Cursor Light: #dddbcd
+Cursor Dark: 
