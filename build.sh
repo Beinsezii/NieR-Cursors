@@ -67,6 +67,7 @@ do
 done
 
 genstatic cursor_left ul left_ptr arrow default top_left_arrow
+genstatic cursor_right ur right_ptr draft_large draft_small
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
