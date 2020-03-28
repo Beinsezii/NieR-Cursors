@@ -12,6 +12,12 @@ SIZES=(24 32 48 64 80 96 112 128)
 genstatic(){
     echo -n > ./working/working.in
 
+    for s in ${SIZES[*]}
+    do
+        inkscape -w $s -h $s ./src/$1.svg -o ./working/$1_$s.png &
+    done
+
+    wait
 
     for s in ${SIZES[*]}
     do
@@ -32,7 +38,6 @@ genstatic(){
             hoty=$hotx
         fi
 
-        inkscape -w $s -h $s ./src/$1.svg -o ./working/$1_$s.png
         echo $s $hotx $hoty ./working/$1_$s.png 100 >> ./working/working.in
     done
 
