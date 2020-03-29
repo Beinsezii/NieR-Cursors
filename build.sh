@@ -1,8 +1,10 @@
 #!/usr/bin/bash
 
 # 64 * 0.25, 0.5, etc through 2.0
-# TODO make more customizable or something idk maybe this is a python job
 SIZES=(24 32 48 64 80 96 112 128)
+
+# TODO make common elements like hotspots and linking their own functions
+
 # argv1: svg name
 # argv2: hotspot. ul (uppperleft), up, ur, mid. fallback mid
 # args+: links
@@ -52,7 +54,14 @@ genstatic(){
 
 }
 
-#same syntax as genstatic(), but looks for a folder of svgs to make an animtion
+
+# argv1: folder
+# argv2: hotspot
+# argv3: delay in ms
+# argv+: links
+# runs the `animate` script present in the folder with the size as an arg.
+# script should produce folder called '__frames' filled with sorted png frames
+# of animation for the given size. frames are named and moved to /working and processed like usual
 genanim() {
     echo -n > ./working/working.in
 
