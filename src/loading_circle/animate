@@ -3,6 +3,8 @@
 
 # Works by iterating over an inkscape circle's 'start/end' vals, used to make
 # semi-circles and such.
+# so what if using imagemagick to rotate the png would be simpler?
+# I aim for nothing less then perfection except for when I get lazy.
 
 
 import math
@@ -27,7 +29,7 @@ def main():
     # to the 'iterations' group, such as [(s1, e1), (s2, e2)]
     iterations = []
     data = ""
-    with open(f'{DIR}/loading.svg', mode='r') as svg:
+    with open(f'{DIR}/loading_circle.svg', mode='r') as svg:
         data = svg.read()
         # two separate searches cause at one point I saw "end" before "start"
         start = float(re.search(r'inkscape:label="Animate".+?sodipodi:start="(.+?)"', data, re.DOTALL).group(1))
