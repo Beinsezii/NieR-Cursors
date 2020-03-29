@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 
 
+# Works by iterating over an inkscape circle's 'start/end' vals, used to make
+# semi-circles and such.
+
+
 import math
 import multiprocessing
 import os
 import re
-import shutil
+import subprocess
 import sys
 DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -13,12 +17,18 @@ DIR = os.path.dirname(os.path.realpath(__file__))
 def main():
     assert len(sys.argv) >= 2
     size = int(sys.argv[1])
-    frames = 30
+    frames = 32
 
-    shutil.copy(f'{DIR}/loading.svg', f'{DIR}/animate.svg')
+    try: os.mkdir(f'{DIR}/__frames')
+    except FileExistsError: pass
+
+    # reads the .svg into 'data' var and
+    # adds the start/end radian vals of the circle in the "Animate" layer
+    # to the 'iterations' group, such as [(s1, e1), (s2, e2)]
     iterations = []
-    with open(f'{DIR}/animate.svg', mode='r') as anim:
-        data = anim.read()
+    data = ""
+    with open(f'{DIR}/loading.svg', mode='r') as svg:
+        data = svg.read()
         # two separate searches cause at one point I saw "end" before "start"
         start = float(re.search(r'inkscape:label="Animate".+?sodipodi:start="(.+?)"', data, re.DOTALL).group(1))
         end = float(re.search(r'inkscape:label="Animate".+?sodipodi:end="(.+?)"', data, re.DOTALL).group(1))
@@ -30,26 +40,31 @@ def main():
             if end > 360: end -= 360
             iterations += [(math.radians(start), math.radians(end))]
 
+    # creates & starts inkscape processes
+    # updates the data var read earlier and pipes it to inkscape's stdin
+    processes = []
     for num, i in enumerate(iterations):
-        data = ""
-        with open(f'{DIR}/animate.svg', mode='r') as anim:
-            data = anim.read()
-            match = re.search(r'inkscape:label="Animate".+?sodipodi:start="(.+?)"', data, re.DOTALL)
-            start, end = match.start(1), match.end(1)
+        # update start iter
+        match = re.search(r'inkscape:label="Animate".+?sodipodi:start="(.+?)"', data, re.DOTALL)
+        start, end = match.start(1), match.end(1)
+        data = data[:start] + str(i[0]) + data[end:]
 
-            data = data[:start] + str(i[0]) + data[end:]
+        # update end iter. re-serach in case length changed from updating start
+        match = re.search(r'inkscape:label="Animate".+?sodipodi:end="(.+?)"', data, re.DOTALL)
+        start, end = match.start(1), match.end(1)
+        data = data[:start] + str(i[1]) + data[end:]
 
-            match = re.search(r'inkscape:label="Animate".+?sodipodi:end="(.+?)"', data, re.DOTALL)
-            start, end = match.start(1), match.end(1)
+        # create process, start, and add to 'processes' list.
+        p = multiprocessing.Process(
+            target=subprocess.run,
+            args=[['inkscape', '-w', f'{size}', '-h', f'{size}', '-o', f'{DIR}/__frames/{num:04d}.png', '-p']],
+            kwargs={"input": bytes(data, encoding='UTF-8')}
+        )
+        p.start()
+        processes.append(p)
 
-            data = data[:start] + str(i[1]) + data[end:]
-
-        with open(f'{DIR}/animate.svg', mode='w') as anim:
-            anim.write(data)
-
-        os.system(f'inkscape -w {size} -h {size} "{DIR}/animate.svg" -o "{DIR}/__frames/{num:04d}.png"')
-
-    os.remove(f'{DIR}/animate.svg')
+    # basically `wait`
+    for p in processes: p.join()
 
 
 if __name__ == "__main__":

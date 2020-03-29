@@ -2,7 +2,7 @@
 
 # 64 * 0.25, 0.5, etc through 2.0
 # TODO make more customizable or something idk maybe this is a python job
-SIZES=(24 32)
+SIZES=(24 32 48 64 80 96 112 128)
 # argv1: svg name
 # argv2: hotspot. ul (uppperleft), up, ur, mid. fallback mid
 # args+: links
