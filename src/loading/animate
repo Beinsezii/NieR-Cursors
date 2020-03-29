@@ -1,0 +1,56 @@
+#!/usr/bin/python3
+
+
+import math
+import multiprocessing
+import os
+import re
+import shutil
+import sys
+DIR = os.path.dirname(os.path.realpath(__file__))
+
+
+def main():
+    assert len(sys.argv) >= 2
+    size = int(sys.argv[1])
+    frames = 30
+
+    shutil.copy(f'{DIR}/loading.svg', f'{DIR}/animate.svg')
+    iterations = []
+    with open(f'{DIR}/animate.svg', mode='r') as anim:
+        data = anim.read()
+        # two separate searches cause at one point I saw "end" before "start"
+        start = float(re.search(r'inkscape:label="Animate".+?sodipodi:start="(.+?)"', data, re.DOTALL).group(1))
+        end = float(re.search(r'inkscape:label="Animate".+?sodipodi:end="(.+?)"', data, re.DOTALL).group(1))
+        arc = round(math.degrees(end - start))
+
+        for x in range(frames):
+            start = (360 / frames) * x
+            end = start + arc
+            if end > 360: end -= 360
+            iterations += [(math.radians(start), math.radians(end))]
+
+    for num, i in enumerate(iterations):
+        data = ""
+        with open(f'{DIR}/animate.svg', mode='r') as anim:
+            data = anim.read()
+            match = re.search(r'inkscape:label="Animate".+?sodipodi:start="(.+?)"', data, re.DOTALL)
+            start, end = match.start(1), match.end(1)
+
+            data = data[:start] + str(i[0]) + data[end:]
+
+            match = re.search(r'inkscape:label="Animate".+?sodipodi:end="(.+?)"', data, re.DOTALL)
+            start, end = match.start(1), match.end(1)
+
+            data = data[:start] + str(i[1]) + data[end:]
+
+        with open(f'{DIR}/animate.svg', mode='w') as anim:
+            anim.write(data)
+
+        os.system(f'inkscape -w {size} -h {size} "{DIR}/animate.svg" -o "{DIR}/__frames/{num:04d}.png"')
+
+    os.remove(f'{DIR}/animate.svg')
+
+
+if __name__ == "__main__":
+    main()
