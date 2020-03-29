@@ -2,7 +2,7 @@
 
 # 64 * 0.25, 0.5, etc through 2.0
 # TODO make more customizable or something idk maybe this is a python job
-SIZES=(24 32 48 64 80 96 112 128)
+SIZES=(24 32)
 # argv1: svg name
 # argv2: hotspot. ul (uppperleft), up, ur, mid. fallback mid
 # args+: links
@@ -38,7 +38,7 @@ genstatic(){
             hoty=$hotx
         fi
 
-        echo $s $hotx $hoty ./working/$1_$s.png 100 >> ./working/working.in
+        echo $s $hotx $hoty ./working/$1\_$s.png 100 >> ./working/working.in
     done
 
     xcursorgen ./working/working.in ./icons/nier_cursors/nier/$1
@@ -54,7 +54,44 @@ genstatic(){
 
 #same syntax as genstatic(), but looks for a folder of svgs to make an animtion
 genanim() {
-    echo TODO
+    echo -n > ./working/working.in
+
+    for s in ${SIZES[*]}
+    do
+
+        if [ $2 == ul ]
+        then
+            hotx=0
+            hoty=0
+        elif [ $2 == up ]
+        then
+            let hotx=$s/2
+            hoty=0
+        elif [ $2 == ur ]
+        then
+            hotx=$s
+            hoty=0
+        else
+            let hotx=$s/2
+            hoty=$hotx
+        fi
+
+        ./src/$1/animate $s
+        for file in ./src/$1/__frames/*
+        do
+            mv $file ./working/$1\_$s\_${file##*/}
+            echo $s $hotx $hoty ./working/$1\_$s\_${file##*/} $3 >> ./working/working.in
+        done
+    done
+
+    xcursorgen ./working/working.in ./icons/nier_cursors/nier/$1
+
+    cd ./icons/nier_cursors/cursors/
+    for link in ${@:4}
+    do
+        ln -sf ../nier/$1 ./$link
+    done
+    cd ../../../
 }
 
 
@@ -68,6 +105,7 @@ done
 
 genstatic cursor_left ul left_ptr arrow default top_left_arrow
 genstatic cursor_right ur right_ptr draft_large draft_small
+genanim loading mid 30 watch wait
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
