@@ -89,7 +89,9 @@ genanim() {
     for s in ${SIZES[*]}
     do
         hotspots $2 $s
-        ./src/$1/animate $s
+        cd ./src/$1/
+        ./animate $s
+        cd ../../
         for file in ./src/$1/__frames/*
         do
             mv $file ./working/$1\_$s\_${file##*/}
@@ -117,6 +119,7 @@ genstatic cursor up sb_up_arrow
 genstatic cursor_down down sb_down_arrow
 
 genanim loading_circle mid 30 watch wait
+genanim cursor_loading ul 30 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
