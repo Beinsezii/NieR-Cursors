@@ -8,7 +8,7 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="cursor_r.svg"
+   sodipodi:docname="cursor_left.svg"
    inkscape:version="1.1-dev (969dcdb233, 2020-03-27)"
    id="svg8"
    version="1.1"
@@ -19,10 +19,10 @@
      id="defs2" />
   <sodipodi:namedview
      inkscape:window-maximized="0"
-     inkscape:window-y="16"
-     inkscape:window-x="1928"
-     inkscape:window-height="2116"
-     inkscape:window-width="1884"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:window-height="2160"
+     inkscape:window-width="3840"
      guidehiopacity="0.50196078"
      guidehicolor="#ff00ff"
      guideopacity="0.50196078"
@@ -36,8 +36,8 @@
      showgrid="true"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
-     inkscape:cy="24.449408"
-     inkscape:cx="27.889123"
+     inkscape:cy="32"
+     inkscape:cx="32"
      inkscape:zoom="11.919595"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -76,14 +76,14 @@
      inkscape:label="Layer 1">
     <image
        xlink:href="cursor.svg"
-       y="-64"
-       x="280.06665"
+       y="198.74414"
+       x="-230.21722"
        preserveAspectRatio="none"
        inkscape:svg-dpi="384"
        width="64"
        height="64"
        id="image1137"
-       style="image-rendering:optimizeQuality"
-       transform="rotate(90)" />
+       transform="rotate(-45)"
+       style="image-rendering:optimizeQuality" />
   </g>
 </svg>

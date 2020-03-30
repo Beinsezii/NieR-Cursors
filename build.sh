@@ -5,8 +5,42 @@ SIZES=(24 32 48 64 80 96 112 128)
 
 # TODO make common elements like hotspots and linking their own functions
 
+# argv1: hotspot string: left, right, up, down, ul, ur, mid. fallback mid
+# argv2: size
+# sets vars hotx and hoty
+hotspots(){
+        if [ $1 == left ]
+        then
+            let hotx=0
+            let hoty=$2/2
+        elif [ $1 == right ]
+        then
+            let hotx=$2
+            let hoty=$2/2
+        elif [ $1 == up ]
+        then
+            let hotx=$2/2
+            let hoty=0
+        elif [ $1 == down ]
+        then
+            let hotx=$2/2
+            let hoty=$2
+        elif [ $1 == ul ]
+        then
+            let hotx=0
+            let hoty=0
+        elif [ $1 == ur ]
+        then
+            let hotx=$2
+            let hoty=0
+        else
+            let hotx=$2/2
+            let hoty=$hotx
+        fi
+}
+
 # argv1: svg name
-# argv2: hotspot. ul (uppperleft), up, ur, mid. fallback mid
+# argv2: hotspot string
 # args+: links
 # so `genstatic cursor_left ul arrow default` will
 # link the x cursors 'arrow' and 'default' with the
@@ -23,23 +57,7 @@ genstatic(){
 
     for s in ${SIZES[*]}
     do
-        if [ $2 == ul ]
-        then
-            hotx=0
-            hoty=0
-        elif [ $2 == up ]
-        then
-            let hotx=$s/2
-            hoty=0
-        elif [ $2 == ur ]
-        then
-            hotx=$s
-            hoty=0
-        else
-            let hotx=$s/2
-            hoty=$hotx
-        fi
-
+        hotspots $2 $s
         echo $s $hotx $hoty ./working/$1\_$s.png 100 >> ./working/working.in
     done
 
@@ -67,24 +85,7 @@ genanim() {
 
     for s in ${SIZES[*]}
     do
-
-        if [ $2 == ul ]
-        then
-            hotx=0
-            hoty=0
-        elif [ $2 == up ]
-        then
-            let hotx=$s/2
-            hoty=0
-        elif [ $2 == ur ]
-        then
-            hotx=$s
-            hoty=0
-        else
-            let hotx=$s/2
-            hoty=$hotx
-        fi
-
+        hotspots $2 $s
         ./src/$1/animate $s
         for file in ./src/$1/__frames/*
         do
@@ -112,8 +113,12 @@ do
     fi
 done
 
-genstatic cursor_left ul left_ptr arrow default top_left_arrow
-genstatic cursor_right ur right_ptr draft_large draft_small
+genstatic cursor_ul ul left_ptr arrow default top_left_arrow
+genstatic cursor_ur ur right_ptr draft_large draft_small
+genstatic cursor_left left sb_left_arrow
+genstatic cursor_right right sb_right_arrow
+genstatic cursor up sb_up_arrow
+genstatic cursor_down down sb_down_arrow
 genanim loading_circle mid 30 watch wait
 
 # inherits Adwaita since that's standard-issue and should be a good fallback

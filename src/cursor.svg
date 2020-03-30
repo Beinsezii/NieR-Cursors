@@ -20,6 +20,18 @@
    inkscape:export-ydpi="96">
   <defs
      id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient866">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0"
+         id="stop862" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1"
+         offset="1"
+         id="stop864" />
+    </linearGradient>
     <inkscape:path-effect
        effect="bool_op"
        id="path-effect959"
@@ -35,18 +47,6 @@
        hide-linked="false"
        operation="diff"
        operand-path="#circle871" />
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient950">
-      <stop
-         style="stop-color:#000000;stop-opacity:0"
-         offset="0"
-         id="stop946" />
-      <stop
-         style="stop-color:#000000;stop-opacity:0.25"
-         offset="1"
-         id="stop948" />
-    </linearGradient>
     <inkscape:path-effect
        effect="bool_op"
        id="path-effect894"
@@ -112,8 +112,8 @@
        swap-operands="false" />
     <radialGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient950"
-       id="radialGradient956"
+       xlink:href="#linearGradient866"
+       id="radialGradient868"
        cx="32"
        cy="40"
        fx="32"
@@ -128,9 +128,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="21.080621"
-     inkscape:cx="-5.3084496"
-     inkscape:cy="42.917075"
+     inkscape:zoom="16.546875"
+     inkscape:cx="14.322946"
+     inkscape:cy="32"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="true"
@@ -144,10 +144,10 @@
      guideopacity="0.50196078"
      guidehicolor="#ff00ff"
      guidehiopacity="0.50196078"
-     inkscape:window-width="3840"
-     inkscape:window-height="2160"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1884"
+     inkscape:window-height="2116"
+     inkscape:window-x="1928"
+     inkscape:window-y="16"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="false">
     <inkscape:grid
@@ -201,11 +201,12 @@
        height="100%" />
   </g>
   <g
+     style="display:inline"
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Orb">
     <circle
-       style="fill:#49463d;fill-opacity:1;stroke:none;stroke-width:6;stroke-miterlimit:3;paint-order:stroke fill markers;fill-rule:nonzero"
+       style="fill:#49463d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:6;stroke-miterlimit:3;paint-order:stroke fill markers"
        id="path906"
        cx="32"
        cy="40"
@@ -215,7 +216,7 @@
        cy="40"
        cx="32"
        id="circle944"
-       style="fill:url(#radialGradient956);fill-opacity:1;stroke:none;stroke-width:6;stroke-miterlimit:3;paint-order:stroke fill markers;fill-rule:nonzero" />
+       style="opacity:0.5;mix-blend-mode:soft-light;fill:url(#radialGradient868);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:6;stroke-miterlimit:3;paint-order:stroke fill markers" />
   </g>
   <g
      transform="translate(0,-280.06666)"
@@ -239,7 +240,7 @@
        inkscape:path-effect="#path-effect959;#path-effect858" />
     <path
        id="path863"
-       style="display:none;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:0.999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="display:none;opacity:0.583;mix-blend-mode:normal;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:0.999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 13.214829,307.06666 -1.999985,3.46484 18.785015,10.84571 v 21.68945 h 3.999971 v -21.68945 l 18.785014,-10.84571 -1.999985,-3.46484 -18.785015,10.8457 z" />
     <ellipse
        ry="6"
@@ -247,7 +248,7 @@
        cy="320.06665"
        cx="31.999844"
        id="circle871"
-       style="display:none;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:6;stroke-miterlimit:3;stroke-opacity:1;paint-order:stroke fill markers" />
+       style="display:none;opacity:0.583;mix-blend-mode:normal;fill:#ff00ff;fill-opacity:1;stroke:none;stroke-width:6;stroke-miterlimit:3;stroke-opacity:1;paint-order:stroke fill markers" />
   </g>
   <g
      inkscape:groupmode="layer"

@@ -14,7 +14,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.1-dev (969dcdb233, 2020-03-27)"
-   sodipodi:docname="cursor_l.svg">
+   sodipodi:docname="cursor_right.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.919595"
-     inkscape:cx="23.400715"
-     inkscape:cy="26.379004"
+     inkscape:cx="7.4605756"
+     inkscape:cy="32"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -40,10 +40,10 @@
      guideopacity="0.50196078"
      guidehicolor="#ff00ff"
      guidehiopacity="0.50196078"
-     inkscape:window-width="1884"
-     inkscape:window-height="2116"
-     inkscape:window-x="1928"
-     inkscape:window-y="16"
+     inkscape:window-width="3840"
+     inkscape:window-height="2160"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
@@ -76,14 +76,14 @@
      transform="translate(0,-280.06666)">
     <image
        xlink:href="cursor.svg"
-       y="0"
-       x="-344.06665"
+       y="153.4893"
+       x="211.11168"
        preserveAspectRatio="none"
        inkscape:svg-dpi="384"
        width="64"
        height="64"
        id="image1137"
-       style="image-rendering:optimizeQuality"
-       transform="rotate(-90)" />
+       transform="rotate(45)"
+       style="image-rendering:optimizeQuality" />
   </g>
 </svg>
