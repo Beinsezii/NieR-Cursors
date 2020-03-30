@@ -3,8 +3,6 @@
 # 64 * 0.25, 0.5, etc through 2.0
 SIZES=(24 32 48 64 80 96 112 128)
 
-# TODO make common elements like hotspots and linking their own functions
-
 # argv1: hotspot string: left, right, up, down, ul, ur, mid. fallback mid
 # argv2: size
 # sets vars hotx and hoty
@@ -39,6 +37,19 @@ hotspots(){
         fi
 }
 
+#argv1: cursor name
+#argv+: links
+genlinks(){
+    xcursorgen ./working/working.in ./icons/nier_cursors/nier/$1
+
+    cd ./icons/nier_cursors/cursors/
+    for link in ${@:2}
+    do
+        ln -sf ../nier/$1 ./$link
+    done
+    cd ../../../
+}
+
 # argv1: svg name
 # argv2: hotspot string
 # args+: links
@@ -61,15 +72,7 @@ genstatic(){
         echo $s $hotx $hoty ./working/$1\_$s.png 100 >> ./working/working.in
     done
 
-    xcursorgen ./working/working.in ./icons/nier_cursors/nier/$1
-
-    cd ./icons/nier_cursors/cursors/
-    for link in ${@:3}
-    do
-        ln -sf ../nier/$1 ./$link
-    done
-    cd ../../../
-
+    genlinks $1 ${@:3}
 }
 
 
@@ -94,14 +97,7 @@ genanim() {
         done
     done
 
-    xcursorgen ./working/working.in ./icons/nier_cursors/nier/$1
-
-    cd ./icons/nier_cursors/cursors/
-    for link in ${@:4}
-    do
-        ln -sf ../nier/$1 ./$link
-    done
-    cd ../../../
+    genlinks $1 ${@:4}
 }
 
 
@@ -119,6 +115,7 @@ genstatic cursor_left left sb_left_arrow
 genstatic cursor_right right sb_right_arrow
 genstatic cursor up sb_up_arrow
 genstatic cursor_down down sb_down_arrow
+
 genanim loading_circle mid 30 watch wait
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
