@@ -37,89 +37,70 @@ hotspots(){
         fi
 }
 
-#argv1: cursor name
-#argv+: links
-genlinks(){
-    xcursorgen ./working/working.in ./icons/nier_cursors/nier/$1
+
+mkifnot(){
+    for folder in ${@}
+    do
+        if [ ! -d $folder ]
+        then
+            mkdir $folder
+        fi
+    done
+}
+
+# argv1: scene name
+# argv2: hotspot string
+# argv3: delay ms
+# args+: links
+genblend(){
+    local folder=./working/$1/
+    local rawfolder=${folder}frames/
+    local sizesfolder=${folder}sizes/
+    local xcursorin=${folder}${1}.in
+    mkifnot $folder $rawfolder $sizesfolder
+    rm ${rawfolder}*.png
+    rm ${sizesfolder}*.png
+
+    echo -n > $xcursorin
+
+    blender ./src/cursor.blend --background --scene $1 --render-output $rawfolder --render-anim
+
+    for s in ${SIZES[*]}
+    do
+        hotspots $2 $s
+        for filein in ${rawfolder}*.png
+        do
+            local fileout=${sizesfolder}${s}px_${filein##*/}
+            magick convert $filein -resize ${s}x${s} -quality 15 $fileout &
+            echo $s $hotx $hoty $fileout $3 >> $xcursorin
+        done
+    done
+
+    wait
+
+    # genlinks $1 ${@:4}
+    xcursorgen $xcursorin ./icons/nier_cursors/nier/$1
 
     cd ./icons/nier_cursors/cursors/
-    for link in ${@:2}
+    for link in ${@:4}
     do
         ln -sf ../nier/$1 ./$link
     done
     cd ../../../
 }
 
-# argv1: svg name
-# argv2: hotspot string
-# args+: links
-# so `genstatic cursor_left ul arrow default` will
-# link the x cursors 'arrow' and 'default' with the
-# export of cursor_left.svg and a hotspot in the upper-left
-genstatic(){
-    echo -n > ./working/working.in
 
-    for s in ${SIZES[*]}
-    do
-        inkscape -w $s -h $s ./src/$1.svg -o ./working/$1_$s.png &
-    done
+mkifnot ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
 
-    wait
+genblend Cursor_UL ul 100 left_ptr arrow default top_left_arrow
+genblend Cursor_UR ur 100 right_ptr draft_large draft_small
+genblend Cursor_L left 100 sb_left_arrow
+genblend Cursor_R right 100 sb_right_arrow
+genblend Cursor up 100 sb_up_arrow
+genblend Cursor_D down 100 sb_down_arrow
 
-    for s in ${SIZES[*]}
-    do
-        hotspots $2 $s
-        echo $s $hotx $hoty ./working/$1\_$s.png 100 >> ./working/working.in
-    done
-
-    genlinks $1 ${@:3}
-}
-
-
-# argv1: folder
-# argv2: hotspot
-# argv3: delay in ms
-# argv+: links
-# runs the `animate` script present in the folder with the size as an arg.
-# script should produce folder called '__frames' filled with sorted png frames
-# of animation for the given size. frames are named and moved to /working and processed like usual
-genanim() {
-    echo -n > ./working/working.in
-
-    for s in ${SIZES[*]}
-    do
-        hotspots $2 $s
-        cd ./src/$1/
-        ./animate $s
-        cd ../../
-        for file in ./src/$1/__frames/*
-        do
-            mv $file ./working/$1\_$s\_${file##*/}
-            echo $s $hotx $hoty ./working/$1\_$s\_${file##*/} $3 >> ./working/working.in
-        done
-    done
-
-    genlinks $1 ${@:4}
-}
-
-
-for folder in ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
-do
-    if [ ! -d $folder ]
-    then
-        mkdir $folder
-    fi
-done
-
-genstatic cursor_ul ul left_ptr arrow default top_left_arrow
-genstatic cursor_ur ur right_ptr draft_large draft_small
-genstatic cursor_left left sb_left_arrow
-genstatic cursor_right right sb_right_arrow
-genstatic cursor up sb_up_arrow
-genstatic cursor_down down sb_down_arrow
-
-genanim loading_circle mid 30 watch wait
-genanim cursor_loading ul 30 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599
+genblend Loading_Circle mid 16.67 watch wait
+genblend Cursor_Loading ul 16.67 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
