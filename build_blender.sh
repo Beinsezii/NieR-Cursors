@@ -64,7 +64,7 @@ genblend(){
         hotspots $2 $s
         for file in ./src/__frames/*
         do
-            magick convert $file -resize ${s}x${s} ./working/${1}_${s}_${file##*/} &
+            magick convert $file -resize ${s}x${s} -quality 15 ./working/${1}_${s}_${file##*/} &
             echo $s $hotx $hoty ./working/${1}_${s}_${file##*/} $3 >> ./working/working.in
         done
     done
@@ -75,33 +75,6 @@ genblend(){
 
     genlinks $1 ${@:4}
 }
-
-
-# argv1: folder
-# argv2: hotspot
-# argv3: delay in ms
-# argv+: links
-# runs the `animate` script present in the folder with the size as an arg.
-# script should produce folder called '__frames' filled with sorted png frames
-# of animation for the given size. frames are named and moved to /working and processed like usual
-# genanim() {
-#     echo -n > ./working/working.in
-
-#     for s in ${SIZES[*]}
-#     do
-#         hotspots $2 $s
-#         cd ./src/$1/
-#         ./animate $s
-#         cd ../../
-#         for file in ./src/$1/__frames/*
-#         do
-#             mv $file ./working/$1\_$s\_${file##*/}
-#             echo $s $hotx $hoty ./working/$1\_$s\_${file##*/} $3 >> ./working/working.in
-#         done
-#     done
-
-#     genlinks $1 ${@:4}
-# }
 
 
 for folder in ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
@@ -119,8 +92,8 @@ genblend Cursor_R right 100 sb_right_arrow
 genblend Cursor up 100 sb_up_arrow
 genblend Cursor_D down 100 sb_down_arrow
 
-# genanim loading_circle mid 30 watch wait
-# genanim cursor_loading ul 30 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599
+genblend Loading_Circle mid 16.67 watch wait
+genblend Cursor_Loading ul 16.67 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]

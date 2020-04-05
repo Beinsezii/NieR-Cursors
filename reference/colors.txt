@@ -1,5 +1,0 @@
-BG: #49463d
-FG: #d3cdb5
-
-Cursor Light: #dddbcd
-Cursor Dark: 
