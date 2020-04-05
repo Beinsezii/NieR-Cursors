@@ -1,2 +1,3 @@
 # NieR Style Cursors
-Uses Inkscape >= 1.0 for linked svgs, and xcursorgen for the cursor file creation.
+Uses Blender 2.82+, xcursorgen, and imagemagick.
+Possibly runs on blender versions as old as 2.80
