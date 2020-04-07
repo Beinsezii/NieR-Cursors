@@ -78,7 +78,6 @@ genblend(){
 
     wait
 
-    # genlinks $1 ${@:4}
     xcursorgen $xcursorin ./icons/nier_cursors/nier/$1
 
     cd ./icons/nier_cursors/cursors/
