@@ -50,7 +50,7 @@ mkifnot(){
 
 # argv1: scene name
 # argv2: hotspot string
-# argv3: delay ms
+# argv3: framerate
 # args+: links
 genblend(){
     local folder=./working/$1/
@@ -72,7 +72,8 @@ genblend(){
         do
             local fileout=${sizesfolder}${s}px_${filein##*/}
             magick convert $filein -resize ${s}x${s} -quality 15 $fileout &
-            echo $s $hotx $hoty $fileout $3 >> $xcursorin
+            local delay=`bc <<< 'scale=2; 1000/'$3`
+            echo $s $hotx $hoty $fileout $delay >> $xcursorin
         done
     done
 
@@ -88,6 +89,8 @@ genblend(){
     cd ../../../
 }
 
+# argv1:  framerate for animations
+# args+: (already rendered) scenes to preview
 genpreviews(){
     local output=./previews/
     mkifnot $output
@@ -101,7 +104,8 @@ genpreviews(){
             cp ${target}/*.png ${output}${x}.png
         elif [ $count -gt 1 ]
         then
-            convert -delay `echo ${1}/10 | bc` -loop 1 ${target}/*.png ${output}${x}.gif &
+            local delay=`bc <<< 'scale=2; 100/'$1`
+            convert -delay $delay -loop 1 ${target}/*.png ${output}${x}.gif &
         fi
     done
     wait
@@ -110,21 +114,21 @@ genpreviews(){
 
 mkifnot ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
 
-genblend Cursor_UL ul 100 left_ptr arrow default top_left_arrow &
-genblend Cursor_UR ur 100 right_ptr draft_large draft_small &
-genblend Cursor_L left 100 sb_left_arrow &
-genblend Cursor_R right 100 sb_right_arrow &
-genblend Cursor up 100 sb_up_arrow &
-genblend Cursor_D down 100 sb_down_arrow &
-genblend Selector mid 100 text xterm &
-genblend Selector_H mid 100 vertical-text &
+genblend Cursor_UL ul 1 left_ptr arrow default top_left_arrow &
+genblend Cursor_UR ur 1 right_ptr draft_large draft_small &
+genblend Cursor_L left 1 sb_left_arrow &
+genblend Cursor_R right 1 sb_right_arrow &
+genblend Cursor up 1 sb_up_arrow &
+genblend Cursor_D down 1 sb_down_arrow &
+genblend Selector mid 1 text xterm &
+genblend Selector_H mid 1 vertical-text &
 
-genblend Loading_Circle mid 16.67 watch wait &
-genblend Cursor_Loading ul 16.67 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
+genblend Loading_Circle mid 60 watch wait &
+genblend Cursor_Loading ul 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
 
 wait
 
-genpreviews 16.67 Cursor_UL Selector Loading_Circle
+genpreviews 60 Cursor_UL Selector Loading_Circle
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
