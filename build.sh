@@ -88,6 +88,25 @@ genblend(){
     cd ../../../
 }
 
+genpreviews(){
+    local output=./previews/
+    mkifnot $output
+
+    for x in ${@:2}
+    do
+        local target=./working/${x}/frames/
+        local count=`find $target | grep -c .png`
+        if [ $count -eq 1 ]
+        then
+            cp ${target}/*.png ${output}${x}.png
+        elif [ $count -gt 1 ]
+        then
+            convert -delay `echo ${1}/10 | bc` -loop 1 ${target}/*.png ${output}${x}.gif &
+        fi
+    done
+    wait
+}
+
 
 mkifnot ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
 
@@ -104,6 +123,8 @@ genblend Loading_Circle mid 16.67 watch wait &
 genblend Cursor_Loading ul 16.67 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
 
 wait
+
+genpreviews 16.67 Cursor_UL Selector Loading_Circle
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
