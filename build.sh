@@ -123,8 +123,8 @@ genblend Cursor_D down 1 sb_down_arrow &
 genblend Selector mid 1 text xterm &
 genblend Selector_H mid 1 vertical-text &
 
-genblend Loading_Circle mid 60 watch wait &
 genblend Cursor_Loading ul 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
+genblend Loading_Circle mid 60 watch wait &
 
 wait
 
