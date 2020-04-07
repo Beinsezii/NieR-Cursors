@@ -105,7 +105,7 @@ genpreviews(){
         elif [ $count -gt 1 ]
         then
             local delay=`bc <<< 'scale=2; 100/'$1`
-            convert -delay $delay -loop 1 ${target}/*.png ${output}${x}.gif &
+            convert -delay $delay -loop 0 ${target}/*.png ${output}${x}.gif &
         fi
     done
     wait
