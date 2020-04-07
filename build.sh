@@ -91,17 +91,19 @@ genblend(){
 
 mkifnot ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
 
-genblend Cursor_UL ul 100 left_ptr arrow default top_left_arrow
-genblend Cursor_UR ur 100 right_ptr draft_large draft_small
-genblend Cursor_L left 100 sb_left_arrow
-genblend Cursor_R right 100 sb_right_arrow
-genblend Cursor up 100 sb_up_arrow
-genblend Cursor_D down 100 sb_down_arrow
-genblend Selector mid 100 text xterm
-genblend Selector_H mid 100 vertical-text
+genblend Cursor_UL ul 100 left_ptr arrow default top_left_arrow &
+genblend Cursor_UR ur 100 right_ptr draft_large draft_small &
+genblend Cursor_L left 100 sb_left_arrow &
+genblend Cursor_R right 100 sb_right_arrow &
+genblend Cursor up 100 sb_up_arrow &
+genblend Cursor_D down 100 sb_down_arrow &
+genblend Selector mid 100 text xterm &
+genblend Selector_H mid 100 vertical-text &
 
-genblend Loading_Circle mid 16.67 watch wait
-genblend Cursor_Loading ul 16.67 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599
+genblend Loading_Circle mid 16.67 watch wait &
+genblend Cursor_Loading ul 16.67 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
+
+wait
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]
