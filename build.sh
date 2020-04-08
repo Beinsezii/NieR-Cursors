@@ -6,6 +6,9 @@ SIZES=(24 32 48 64 80 96 112 128)
 # argv1: hotspot string: left, right, up, down, ul, ur, mid. fallback mid
 # argv2: size
 # sets vars hotx and hoty
+# POSSIBLE TODO: since I'm using `bc` more liberally now,
+# would it be better to take 2 %'s as hotspot X and Y coords?
+# Would remove the need for this function all together as that's fairly legible.
 hotspots(){
         if [ $1 == left ]
         then
@@ -72,6 +75,10 @@ genblend(){
         do
             local fileout=${sizesfolder}${s}px_${filein##*/}
             magick convert $filein -resize ${s}x${s} -quality 15 $fileout &
+            # this the idiomatic way to modify the scale for `bc`? Looks weird.
+            # I just copy-pasted this from stack overflow since there doesn't seem to be a scale flag
+            # IDEK if xcursorgen or the .gif format support decimal vals but `bc` truncates it instead of rounding otherwise
+            # I'm spoiled by python's math.
             local delay=`bc <<< 'scale=2; 1000/'$3`
             echo $s $hotx $hoty $fileout $delay >> $xcursorin
         done
