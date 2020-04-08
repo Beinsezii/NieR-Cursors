@@ -40,3 +40,9 @@ idk how thisll look online maybe it should be one big image don't feel like writ
 - watch -> Loading_Circle
 - xterm -> Selector
 - - plus the appropriate gibberish-string ones
+
+## F.A.Q.
+Question|Answer
+---|---
+Why does .build.sh take years?|60fps animations. Smoother than a well-oiled Adam. When this pack actually has more cursors than I have digits and assuming I'm not alone in the world, I *might* upload premade packs. Maybe I should do it anyway since I've never used the 'attach-file-to-tag' feature on github and it'd probably be handy to know.
+What is this licensed under?|IDK whatever doesn't get me sue by squeenix. CC0 if possible; I just make stuff cause I wanna.
