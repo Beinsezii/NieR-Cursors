@@ -46,3 +46,4 @@ Question|Answer
 ---|---
 Why does .build.sh take years?|60fps animations. Smoother than a well-oiled Adam. When this pack actually has more cursors than I have digits and assuming I'm not alone in the world, I *might* upload premade packs. Maybe I should do it anyway since I've never used the 'attach-file-to-tag' feature on github and it'd probably be handy to know.
 What is this licensed under?|IDK whatever doesn't get me sue by squeenix. CC0 if possible; I just make stuff cause I wanna.
+Some cursors look 'off'. Ex: Default arrow.|They're mathematically perfect, not optically/perceptually perfect. Accounting for the distortion of dumb human brains takes more effort than I'm willing to put in right now.
