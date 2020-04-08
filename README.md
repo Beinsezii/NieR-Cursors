@@ -6,9 +6,11 @@ renditions updated when you run ./build.sh before committing.
 idk how thisll look online maybe it should be one big image don't feel like writing the code to make an imagemagick grid right now.
 
 ---
-![Cursor_UL](./previews/Cursor_UL.png)
-![Selector](./previews/Selector.png)
-![Loading_Circle](./previews/Loading_Circle.gif)
+<div class="row">
+<img width="64" src="./previews/Cursor_UL.png" />
+<img width="64" src="./previews/Selector.png" />
+<img width="64" src="./previews/Loading_Circle.gif" />
+</div>
 
 ## "Cool how do I yes?"
 
