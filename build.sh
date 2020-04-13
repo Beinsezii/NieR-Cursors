@@ -92,10 +92,6 @@ genblend(){
         do
             local fileout=${sizesfolder}${s}px_${filein##*/}
             magick convert $filein -resize ${s}x${s} -quality 15 $fileout &
-            # this the idiomatic way to modify the scale for `bc`? Looks weird.
-            # I just copy-pasted this from stack overflow since there doesn't seem to be a scale flag
-            # IDEK if xcursorgen or the .gif format support decimal vals but `bc` truncates it instead of rounding otherwise
-            # I'm spoiled by python's math.
             local delay=$(round $(math "1000/$4"))
             echo $s $hotx $hoty $fileout $delay >> $xcursorin
         done
