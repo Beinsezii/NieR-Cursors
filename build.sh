@@ -106,7 +106,7 @@ genblend(){
     xcursorgen $xcursorin ./icons/nier_cursors/nier/$1
 
     cd ./icons/nier_cursors/cursors/
-    for link in ${@:4}
+    for link in ${@:5}
     do
         ln -sf ../nier/$1 ./$link
     done
@@ -162,6 +162,19 @@ genblend Arrows_Dot_LR 0.5 0.5 1 col-resize ew-resize h_double_arrow sb_h_double
 genblend Arrows_Dot_ULLR 0.5 0.5 1 bd_double_arrow nwse-resize size_fdiag c7088f0f3e6c8088236ef8e1e3e70000 &
 genblend Arrows_Dot_LLUR 0.5 0.5 1 fd_double_arrow nesw-resize size_bdiag fcf1c3c7cd4491d801f1e1c78f100000 &
 genblend Arrows_Dot_Full 0.5 0.5 1 move 4498f0e0c1937ffe01fd06f973665830 9081237383d90e509aa00f00170e968f &
+
+genblend Arrow 0.5 0.0 1 top_tee &
+genblend Arrow_UR 1.0 0.0 1 ur_angle &
+genblend Arrow_R 1.0 0.5 1 right_tee &
+genblend Arrow_LR 1.0 1.0 1 lr_angle &
+genblend Arrow_D 0.5 1.0 1 bottom_tee &
+genblend Arrow_LL 0.0 1.0 1 ll_angle &
+genblend Arrow_L 0.0 0.5 1 left_tee &
+genblend Arrow_UL 0.0 0.0 1 ul_angle &
+
+genblend Arrows_Full 0.5 0.5 1 all-scroll fleur size_all &
+
+wait
 
 genblend Cursor_Loading 0.0 0.0 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
 genblend Loading_Circle 0.5 0.5 60 watch wait &
