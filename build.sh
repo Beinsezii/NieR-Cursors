@@ -125,7 +125,7 @@ genpreviews(){
         elif [ $count -gt 1 ]
         then
             local delay=$(round $(math "100/$1"))
-            convert -dispose Previous -delay $delay -loop 0 ${target}/*.png ${output}${x}.gif &
+            convert -dispose Background -delay $delay -loop 0 ${target}/*.png ${output}${x}.gif &
         fi
     done
     wait
