@@ -13,6 +13,7 @@ idk how thisll look online maybe it should be one big image don't feel like writ
 <img width="64" src="./previews/Arrows_Dot_UD.png" />
 <img width="64" src="./previews/Cursor_Error.gif" />
 </div>
+Adwaita is a fallback for those not included. This can be changed in the "index.theme" file present in the built theme.
 
 ## "Cool how do I yes?"
 
@@ -20,8 +21,6 @@ idk how thisll look online maybe it should be one big image don't feel like writ
 2. download the thing
 3. run the `build.sh` file
 4. a folder will appear called 'icons' that has the theme inside. up to your distro gods what to do with the generated theme.
-
-Adwaita is a fallback for those not included. This can be changed in the "index.theme" file present in the built theme.
 
 ## F.A.Q.
 Question|Answer
