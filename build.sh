@@ -82,7 +82,7 @@ genblend(){
 
     echo -n > $xcursorin
 
-    blender ./src/cursor.blend --background --scene $1 --render-output $rawfolder --render-anim
+    blender ./src/cursor.blend --background --scene $1 --render-output $rawfolder --render-anim &>/dev/null
 
     for s in ${SIZES[*]}
     do
@@ -125,7 +125,7 @@ genpreviews(){
         elif [ $count -gt 1 ]
         then
             local delay=$(round $(math "100/$1"))
-            convert -dispose Background -delay $delay -loop 0 ${target}/*.png ${output}${x}.gif &
+            convert -dispose Background -delay $delay -loop 0 -define webp:lossless=true ${target}/*.png ${output}${x}.webp &
         fi
     done
     wait
@@ -174,12 +174,12 @@ wait
 
 genblend Cursor_Loading 0.0 0.0 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
 genblend Loading_Circle 0.5 0.5 60 watch wait &
-genblend Cursor_Error 0.0 0.0 5 crossed_circle not-allowed 03b6e0fcb3499374a867c041f52298f0 &
+genblend Cursor_Error 0.0 0.0 8 crossed_circle not-allowed 03b6e0fcb3499374a867c041f52298f0 &
 
 wait
 
 genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD
-genpreviews 5 Cursor_Error
+genpreviews 8 Cursor_Error
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
 echo """[Icon Theme]

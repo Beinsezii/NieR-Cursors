@@ -9,9 +9,9 @@ idk how thisll look online maybe it should be one big image don't feel like writ
 <div class="row">
 <img width="64" src="./previews/Cursor_UL.png" />
 <img width="64" src="./previews/Selector.png" />
-<img width="64" src="./previews/Loading_Circle.gif" />
+<img width="64" src="./previews/Loading_Circle.webp" />
 <img width="64" src="./previews/Arrows_Dot_UD.png" />
-<img width="64" src="./previews/Cursor_Error.gif" />
+<img width="64" src="./previews/Cursor_Error.webp" />
 </div>
 Adwaita is a fallback for those not included. This can be changed in the "index.theme" file present in the built theme.
 
