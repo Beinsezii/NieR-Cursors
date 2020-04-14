@@ -11,6 +11,7 @@ idk how thisll look online maybe it should be one big image don't feel like writ
 <img width="64" src="./previews/Selector.png" />
 <img width="64" src="./previews/Loading_Circle.gif" />
 <img width="64" src="./previews/Arrows_Dot_UD.png" />
+<img width="64" src="./previews/Cursor_Error.gif" />
 </div>
 
 ## "Cool how do I yes?"
