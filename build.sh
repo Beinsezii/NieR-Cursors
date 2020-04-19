@@ -157,7 +157,7 @@ genblend Arrows_Dot_UD 0.5 0.5 1 double_arrow ns-resize row-resize sb_v_double_a
 genblend Arrows_Dot_LR 0.5 0.5 1 col-resize ew-resize h_double_arrow sb_h_double_arrow size_hor 028006030e0e7ebffc7f7070c0600140 14fef782d02440884392942c11205230 &
 genblend Arrows_Dot_ULLR 0.5 0.5 1 bd_double_arrow nwse-resize size_fdiag c7088f0f3e6c8088236ef8e1e3e70000 &
 genblend Arrows_Dot_LLUR 0.5 0.5 1 fd_double_arrow nesw-resize size_bdiag fcf1c3c7cd4491d801f1e1c78f100000 &
-genblend Arrows_Dot_Full 0.5 0.5 1 move 4498f0e0c1937ffe01fd06f973665830 9081237383d90e509aa00f00170e968f &
+genblend Arrows_Dot_Full 0.5 0.5 1 all-scroll fleur size_all &
 
 genblend Arrow 0.5 0.0 1 top_tee &
 genblend Arrow_UR 0.85 0.15 1 ur_angle &
@@ -168,7 +168,7 @@ genblend Arrow_LL 0.15 0.85 1 ll_angle &
 genblend Arrow_L 0.0 0.5 1 left_tee &
 genblend Arrow_UL 0.15 0.15 1 ul_angle &
 
-genblend Arrows_Full 0.5 0.5 1 all-scroll fleur size_all &
+genblend Arrows_Full 0.5 0.5 1 move 4498f0e0c1937ffe01fd06f973665830 9081237383d90e509aa00f00170e968f &
 
 wait
 
