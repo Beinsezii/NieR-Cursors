@@ -170,6 +170,10 @@ genblend Arrow_UL 0.15 0.15 1 ul_angle &
 
 genblend Arrows_Full 0.5 0.5 1 move 4498f0e0c1937ffe01fd06f973665830 9081237383d90e509aa00f00170e968f &
 
+genblend Hand 0.5 0.1 1 hand1 grab &
+genblend Hand_Point 0.375 0.1 1 hand hand2 pointer 9d800788f1b08800ae810202380a0822 e29285e634086352946a0e7090d73106 &
+genblend Hand_Grab 0.5 0.5 1 grabbing dnd-none &
+
 wait
 
 genblend Cursor_Loading 0.0 0.0 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
@@ -178,7 +182,7 @@ genblend Cursor_Error 0.0 0.0 8 crossed_circle not-allowed 03b6e0fcb3499374a867c
 
 wait
 
-genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD
+genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point
 genpreviews 8 Cursor_Error
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
