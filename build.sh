@@ -17,44 +17,6 @@ math() {
     echo $(echo "scale=${scale};$1" | bc)
 }
 
-# argv1: hotspot string: left, right, up, down, ul, ur, mid. fallback mid
-# argv2: size
-# sets vars hotx and hoty
-# POSSIBLE TODO: since I'm using `bc` more liberally now,
-# would it be better to take 2 %'s as hotspot X and Y coords?
-# Would remove the need for this function all together as that's fairly legible.
-hotspots(){
-        if [ $1 == left ]
-        then
-            let hotx=0
-            let hoty=$2/2
-        elif [ $1 == right ]
-        then
-            let hotx=$2
-            let hoty=$2/2
-        elif [ $1 == up ]
-        then
-            let hotx=$2/2
-            let hoty=0
-        elif [ $1 == down ]
-        then
-            let hotx=$2/2
-            let hoty=$2
-        elif [ $1 == ul ]
-        then
-            let hotx=0
-            let hoty=0
-        elif [ $1 == ur ]
-        then
-            let hotx=$2
-            let hoty=0
-        else
-            let hotx=$2/2
-            let hoty=$hotx
-        fi
-}
-
-
 mkifnot(){
     for folder in ${@}
     do
@@ -132,14 +94,33 @@ genpreviews(){
 }
 
 
+genwindows(){
+    mkifnot icons/nier_cursors_windows/
+    local format=.cur
+    if [ ${3:-0} -eq 1 ]
+    then
+        format=.ani
+    fi
+
+    echo building $1 as $2$format
+    ./anicursorgen.py ./working/$1/$1.in icons/nier_cursors_windows/${2}${format}
+    echo finished building $1 as $2$format
+}
+
+
 mkifnot ./working/ ./icons/ ./icons/nier_cursors/ ./icons/nier_cursors/nier/ ./icons/nier_cursors/cursors
 
-genblend Cursor_UL 0.0 0.0 1 left_ptr arrow default top_left_arrow &
-genblend Cursor_UR 1.0 0.0 1 right_ptr draft_large draft_small &
-genblend Cursor_L 0.0 0.5 1 sb_left_arrow &
-genblend Cursor_R 1.0 0.5 1 sb_right_arrow &
-genblend Cursor 0.5 0.0 1 sb_up_arrow &
-genblend Cursor_D 0.5 1.0 1 sb_down_arrow &
+
+# cursor corner, inverted
+cc=0.05
+cci=$(math "1-$cc")
+
+genblend Cursor_UL $cc $cc 1 left_ptr arrow default top_left_arrow &
+genblend Cursor_UR $cci $cc 1 right_ptr draft_large draft_small &
+genblend Cursor_L $cc 0.5 1 sb_left_arrow &
+genblend Cursor_R $cci 0.5 1 sb_right_arrow &
+genblend Cursor 0.5 $cc 1 sb_up_arrow &
+genblend Cursor_D 0.5 $cci 1 sb_down_arrow &
 
 genblend Selector 0.5 0.5 1 text xterm &
 genblend Selector_H 0.5 0.5 1 vertical-text &
@@ -159,14 +140,20 @@ genblend Arrows_Dot_ULLR 0.5 0.5 1 bd_double_arrow nwse-resize size_fdiag c7088f
 genblend Arrows_Dot_LLUR 0.5 0.5 1 fd_double_arrow nesw-resize size_bdiag fcf1c3c7cd4491d801f1e1c78f100000 &
 genblend Arrows_Dot_Full 0.5 0.5 1 all-scroll fleur size_all &
 
-genblend Arrow 0.5 0.0 1 top_tee &
-genblend Arrow_UR 0.85 0.15 1 ur_angle &
-genblend Arrow_R 1.0 0.5 1 right_tee &
-genblend Arrow_LR 0.85 0.85 1 lr_angle &
-genblend Arrow_D 0.5 1.0 1 bottom_tee &
-genblend Arrow_LL 0.15 0.85 1 ll_angle &
-genblend Arrow_L 0.0 0.5 1 left_tee &
-genblend Arrow_UL 0.15 0.15 1 ul_angle &
+# arrow polar and corner [inverted]
+ap=0.05
+api=$(math "1-$ap")
+ac=0.15
+aci=$(math "1-$ac")
+
+genblend Arrow 0.5 $ap 1 top_tee &
+genblend Arrow_UR $aci $ac 1 ur_angle &
+genblend Arrow_R $api 0.5 1 right_tee &
+genblend Arrow_LR $aci $aci 1 lr_angle &
+genblend Arrow_D 0.5 $api 1 bottom_tee &
+genblend Arrow_LL $ac $aci 1 ll_angle &
+genblend Arrow_L $ap 0.5 1 left_tee &
+genblend Arrow_UL $ac $ac 1 ul_angle &
 
 genblend Arrows_Full 0.5 0.5 1 move 4498f0e0c1937ffe01fd06f973665830 9081237383d90e509aa00f00170e968f &
 
@@ -176,9 +163,9 @@ genblend Hand_Grab 0.5 0.5 1 grabbing dnd-none &
 
 wait
 
-genblend Cursor_Loading 0.0 0.0 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
+genblend Cursor_Loading $cc $cc 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
 genblend Loading_Circle 0.5 0.5 60 watch wait &
-genblend Cursor_Error 0.0 0.0 8 crossed_circle not-allowed 03b6e0fcb3499374a867c041f52298f0 &
+genblend Cursor_Error $cc $cc 8 crossed_circle not-allowed 03b6e0fcb3499374a867c041f52298f0 &
 
 wait
 
@@ -189,3 +176,71 @@ genpreviews 8 Cursor_Error
 echo """[Icon Theme]
 Name=NieR Cursors
 Inherits=Adwaita""" > ./icons/nier_cursors/index.theme
+
+# Windows
+genwindows Cursor_UL normal-select
+genwindows Cursor alt-select
+genwindows Loading_Circle busy 1
+genwindows Cursor_Loading working-in-background 1
+genwindows Selector text-select
+genwindows Arrows_Full move
+genwindows Arrows_Dot_ULLR diagonal-resize-1
+genwindows Arrows_Dot_LLUR diagonal-resize-2
+genwindows Arrows_Dot_UD vertical-resize
+genwindows Arrows_Dot_LR horizontal-resize
+genwindows Hand_Point link-select
+
+echo '; Incomplete. Based on Capitaine Cursors install.inf
+
+[Version]
+signature="$CHICAGO$"
+
+[DefaultInstall]
+CopyFiles = Scheme.Cur, Scheme.Txt
+AddReg    = Scheme.Reg
+
+[DestinationDirs]
+Scheme.Cur = 10,"%CUR_DIR%"
+Scheme.Txt = 10,"%CUR_DIR%"
+
+[Scheme.Reg]
+HKCU,"Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%10%\%CUR_DIR%\%pointer%,%10%\%CUR_DIR%\%help%,%10%\%CUR_DIR%\%work%,%10%\%CUR_DIR%\%busy%,%10%\%CUR_DIR%\%cross%,%10%\%CUR_DIR%\%Text%,%10%\%CUR_DIR%\%Hand%,%10%\%CUR_DIR%\%unavailiable%,%10%\%CUR_DIR%\%Vert%,%10%\%CUR_DIR%\%Horz%,%10%\%CUR_DIR%\%Dgn1%,%10%\%CUR_DIR%\%Dgn2%,%10%\%CUR_DIR%\%move%,%10%\%CUR_DIR%\%alternate%,%10%\%CUR_DIR%\%link%"
+
+; -- Installed files
+
+[Scheme.Cur]
+busy.ani
+working-in-background.ani
+normal-select.cur
+help-select.cur
+link-select.cur
+move.cur
+diagonal-resize-2.cur
+Install.inf
+vertical-resize.cur
+horizontal-resize.cur
+diagonal-resize-1.cur
+handwriting.cur
+precision-select.cur
+text-select.cur
+unavailable.cur
+alt-select.cur
+
+[Strings]
+CUR_DIR       = "Cursors\NieR Cursors"
+SCHEME_NAME   = "NieR Cursors"
+pointer       = "normal-select.cur"
+help          = "help-select.cur"
+work          = "working-in-background.ani"
+busy          = "busy.ani"
+text          = "text-select.cur"
+unavailiable  = "unavailable.cur"
+vert          = "vertical-resize.cur"
+horz          = "horizontal-resize.cur"
+dgn1          = "diagonal-resize-1.cur"
+dgn2          = "diagonal-resize-2.cur"
+move          = "move.cur"
+link          = "link-select.cur"
+cross         = "precision-select.cur"
+hand          = "handwriting.cur"
+alternate     = "alt-select.cur"' > ./icons/nier_cursors_windows/install.inf
