@@ -52,7 +52,7 @@ genblend(){
         local hoty=$(round $(math "$s*$3"))
         for filein in ${rawfolder}*.png
         do
-            local fileout=${sizesfolder}${s}px_${filein##*/}
+            local fileout=${sizesfolder}$(printf "%03d" $s)px_${filein##*/}
             magick convert $filein -resize ${s}x${s} -quality 15 $fileout &
             local delay=$(round $(math "1000/$4"))
             echo $s $hotx $hoty $fileout $delay >> $xcursorin
@@ -71,8 +71,11 @@ genblend(){
     cd ../../../
 }
 
-# argv1:  framerate for animations
-# args+: (already rendered) scenes to preview
+# argv1: scene name
+# argv2: hotspot % X (0.0-1.0)
+# argv3: hotspot % Y (0.0-1.0)
+# argv4: framerate
+# argv5: windows cursor name
 genpreviews(){
     local output=./previews/
     mkifnot $output
@@ -95,16 +98,34 @@ genpreviews(){
 
 
 genwindows(){
-    mkifnot icons/nier_cursors_windows/
+    local folder=./working/$1/
+    local rawfolder=${folder}frames/
+    local sizesfolder=${folder}sizes/
+
+    local frames=(${rawfolder}*.png)
+    local icofolder=${folder}icos/
+    local curfolder=icons/nier_cursors_windows/
     local format=.cur
-    if [ ${3:-0} -eq 1 ]
+    if [ ${#frames[@]} -gt 1 ]
     then
-        format=.ani
+        local format=.ani
     fi
 
-    echo building $1 as $2$format
-    ./anicursorgen.py ./working/$1/$1.in icons/nier_cursors_windows/${2}${format}
-    echo finished building $1 as $2$format
+    mkifnot $curfolder $icofolder
+    rm ${icofolder}/*.ico
+
+    for f in $frames
+    do
+        f=${f##*/}
+        magick convert ${sizesfolder}/*${f} ${icofolder}/${f%.png}.ico
+    done
+
+    if [ $format = '.cur' ]
+    then
+        ./icotocur.py ${icofolder}/*.ico $2 $3 ${curfolder}/${5}.cur
+    else
+        echo ANI TODO
+    fi
 }
 
 
@@ -178,18 +199,18 @@ Name=NieR Cursors
 Inherits=Adwaita""" > ./icons/nier_cursors/index.theme
 
 # Windows
-genwindows Cursor_UL normal-select
-genwindows Cursor alt-select
-genwindows Cursor_Error unavailable 1
-genwindows Loading_Circle busy 1
-genwindows Cursor_Loading working-in-background 1
-genwindows Selector text-select
-genwindows Arrows_Full move
-genwindows Arrows_Dot_ULLR diagonal-resize-1
-genwindows Arrows_Dot_LLUR diagonal-resize-2
-genwindows Arrows_Dot_UD vertical-resize
-genwindows Arrows_Dot_LR horizontal-resize
-genwindows Hand_Point link-select
+genwindows Cursor_UL $cc $cc 1 normal-select
+genwindows Cursor 0.5 $cc 1 alt-select
+genwindows Cursor_Error $cc $cc 8 unavailable
+genwindows Loading_Circle 0.5 0.5 60 busy
+genwindows Cursor_Loading $cc $cc 60 working-in-background
+genwindows Selector 0.5 0.5 1 text-select
+genwindows Arrows_Full 0.5 0.5 1 move
+genwindows Arrows_Dot_ULLR 0.5 0.5 1 diagonal-resize-1
+genwindows Arrows_Dot_LLUR 0.5 0.5 1 diagonal-resize-2
+genwindows Arrows_Dot_UD 0.5 0.5 1 vertical-resize
+genwindows Arrows_Dot_LR 0.5 0.5 1 horizontal-resize
+genwindows Hand_Point 0.375 0.1 1 link-select
 
 echo '; Incomplete. Based on Capitaine Cursors install.inf
 
@@ -224,7 +245,7 @@ diagonal-resize-1.cur
 handwriting.cur
 precision-select.cur
 text-select.cur
-unavailable.cur
+unavailable.ani
 alt-select.cur
 
 [Strings]
@@ -235,7 +256,7 @@ help          = "help-select.cur"
 work          = "working-in-background.ani"
 busy          = "busy.ani"
 text          = "text-select.cur"
-unavailiable  = "unavailable.cur"
+unavailiable  = "unavailable.ani"
 vert          = "vertical-resize.cur"
 horz          = "horizontal-resize.cur"
 dgn1          = "diagonal-resize-1.cur"
