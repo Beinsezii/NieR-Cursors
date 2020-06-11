@@ -180,6 +180,7 @@ Inherits=Adwaita""" > ./icons/nier_cursors/index.theme
 # Windows
 genwindows Cursor_UL normal-select
 genwindows Cursor alt-select
+genwindows Cursor_Error unavailable 1
 genwindows Loading_Circle busy 1
 genwindows Cursor_Loading working-in-background 1
 genwindows Selector text-select
