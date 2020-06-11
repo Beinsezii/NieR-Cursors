@@ -124,7 +124,8 @@ genwindows(){
     then
         ./icotocur.py ${icofolder}/*.ico $2 $3 ${curfolder}/${5}.cur
     else
-        echo ANI TODO
+        echo .ani TODO. Falling back to .cur
+        ./icotocur.py ${icofolder}/0001.ico $2 $3 ${curfolder}/${5}.cur
     fi
 }
 
@@ -231,8 +232,8 @@ HKCU,"Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%10%\%CUR_DIR%\%pointer%,
 ; -- Installed files
 
 [Scheme.Cur]
-busy.ani
-working-in-background.ani
+busy.cur
+working-in-background.cur
 normal-select.cur
 help-select.cur
 link-select.cur
@@ -245,7 +246,7 @@ diagonal-resize-1.cur
 handwriting.cur
 precision-select.cur
 text-select.cur
-unavailable.ani
+unavailable.cur
 alt-select.cur
 
 [Strings]
@@ -253,10 +254,10 @@ CUR_DIR       = "Cursors\NieR Cursors"
 SCHEME_NAME   = "NieR Cursors"
 pointer       = "normal-select.cur"
 help          = "help-select.cur"
-work          = "working-in-background.ani"
-busy          = "busy.ani"
+work          = "working-in-background.cur"
+busy          = "busy.cur"
 text          = "text-select.cur"
-unavailiable  = "unavailable.ani"
+unavailiable  = "unavailable.cur"
 vert          = "vertical-resize.cur"
 horz          = "horizontal-resize.cur"
 dgn1          = "diagonal-resize-1.cur"
