@@ -1,6 +1,6 @@
 # NieR Style Cursors
 Uses Blender 2.82+, xcursorgen, imagemagick, and of course common bash tools like `bc`. Building for windows also needs Python 3.
-*Possibly* runs on blender versions as old as 2.80
+*Possibly* runs on blender versions as old as 2.80. Windows builds currently don't support animation.
 ## Preview Images
 renditions updated when you run ./build.sh before committing.
 idk how thisll look online maybe it should be one big image don't feel like writing the code to make an imagemagick grid right now.
@@ -24,6 +24,11 @@ Adwaita is a fallback for those not included. This can be changed in the "index.
 2. download the thing
 3. run the `build.sh` file
 4. a folder will appear called 'icons' that has the theme inside. up to your distro gods what to do with the generated theme.
+
+### Installation of prebuilt themes
+
+ - Linux: Unpack the archive and put the folder in ./local/share/icons/, then pick the cursor theme with whatever desktop/theme manager you use.
+ - Windows: Unpack the archive, right-click 'install.inf', and select 'install'. Right now, not every cursor has a windows equivalent, so when the dialogue box shows up complaining about "File not found", just close it and move on. Finally, go to control-panel -> mouse -> pointers and select "NieR Cursors" as your theme.
 
 ## F.A.Q.
 Question|Answer
