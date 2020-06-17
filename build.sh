@@ -183,6 +183,9 @@ genblend Hand 0.5 0.1 1 hand1 grab &
 genblend Hand_Point 0.375 0.1 1 hand hand2 pointer 9d800788f1b08800ae810202380a0822 e29285e634086352946a0e7090d73106 &
 genblend Hand_Grab 0.5 0.5 1 grabbing dnd-none &
 
+genblend Crosshair 0.5 0.5 1 cross crosshair cross_reverse diamond_cross \
+    tcross cell &
+
 wait
 
 genblend Cursor_Loading $cc $cc 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
@@ -191,7 +194,7 @@ genblend Cursor_Error $cc $cc 8 crossed_circle not-allowed 03b6e0fcb3499374a867c
 
 wait
 
-genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point
+genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair
 genpreviews 8 Cursor_Error
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
@@ -200,18 +203,19 @@ Name=NieR Cursors
 Inherits=Adwaita""" > ./icons/nier_cursors/index.theme
 
 # Windows
-genwindows Cursor_UL $cc $cc 1 normal-select
-genwindows Cursor 0.5 $cc 1 alt-select
-genwindows Cursor_Error $cc $cc 8 unavailable
-genwindows Loading_Circle 0.5 0.5 60 busy
-genwindows Cursor_Loading $cc $cc 60 working-in-background
-genwindows Selector 0.5 0.5 1 text-select
-genwindows Arrows_Full 0.5 0.5 1 move
-genwindows Arrows_Dot_ULLR 0.5 0.5 1 diagonal-resize-1
-genwindows Arrows_Dot_LLUR 0.5 0.5 1 diagonal-resize-2
-genwindows Arrows_Dot_UD 0.5 0.5 1 vertical-resize
-genwindows Arrows_Dot_LR 0.5 0.5 1 horizontal-resize
-genwindows Hand_Point 0.375 0.1 1 link-select
+genwindows Cursor_UL $cc $cc 1 normal-select &
+genwindows Cursor 0.5 $cc 1 alt-select &
+genwindows Cursor_Error $cc $cc 8 unavailable &
+genwindows Loading_Circle 0.5 0.5 60 busy &
+genwindows Cursor_Loading $cc $cc 60 working-in-background &
+genwindows Selector 0.5 0.5 1 text-select &
+genwindows Arrows_Full 0.5 0.5 1 move &
+genwindows Arrows_Dot_ULLR 0.5 0.5 1 diagonal-resize-1 &
+genwindows Arrows_Dot_LLUR 0.5 0.5 1 diagonal-resize-2 &
+genwindows Arrows_Dot_UD 0.5 0.5 1 vertical-resize &
+genwindows Arrows_Dot_LR 0.5 0.5 1 horizontal-resize &
+genwindows Hand_Point 0.375 0.1 1 link-select &
+genwindows Crosshair 0.5 0.5 1 precision-select &
 
 echo '; Incomplete. Based on Capitaine Cursors install.inf
 
@@ -267,3 +271,7 @@ link          = "link-select.cur"
 cross         = "precision-select.cur"
 hand          = "handwriting.cur"
 alternate     = "alt-select.cur"' > ./icons/nier_cursors_windows/install.inf
+
+wait
+
+echo Done.
