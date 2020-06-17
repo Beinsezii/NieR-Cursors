@@ -185,6 +185,7 @@ genblend Hand_Grab 0.5 0.5 1 grabbing dnd-none &
 
 genblend Crosshair 0.5 0.5 1 cross crosshair cross_reverse diamond_cross \
     tcross cell &
+genblend Targeter 0.5 0.5675 1 dotbox dot_box_mask icon target &
 
 wait
 
@@ -194,7 +195,7 @@ genblend Cursor_Error $cc $cc 8 crossed_circle not-allowed 03b6e0fcb3499374a867c
 
 wait
 
-genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair
+genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair Targeter
 genpreviews 8 Cursor_Error
 
 # inherits Adwaita since that's standard-issue and should be a good fallback

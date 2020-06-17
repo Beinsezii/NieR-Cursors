@@ -14,6 +14,7 @@ idk how thisll look online maybe it should be one big image don't feel like writ
 <img width="64" src="./previews/Cursor_Error.webp" />
 <img width="64" src="./previews/Hand_Point.png" />
 <img width="64" src="./previews/Crosshair.png" />
+<img width="64" src="./previews/Targeter.png" />
 </div>
 Adwaita is a fallback for those not included. This can be changed in the "index.theme" file present in the built theme.
 
