@@ -1,5 +1,5 @@
 # NieR Style Cursors
-Uses Blender 2.82+, xcursorgen, imagemagick, and of course common bash tools like `bc` and probably more.
+Uses Blender 2.82+, xcursorgen, imagemagick, and of course common bash tools like `bc`. Building for windows also needs Python 3.
 *Possibly* runs on blender versions as old as 2.80
 ## Preview Images
 renditions updated when you run ./build.sh before committing.
