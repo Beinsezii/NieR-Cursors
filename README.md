@@ -29,7 +29,7 @@ Adwaita is a fallback for those not included. This can be changed in the "index.
 
 ### Installation of prebuilt themes
 
- - Linux: Unpack the archive and put the folder in ./local/share/icons/, then pick the cursor theme with whatever desktop/theme manager you use.
+ - Linux: Unpack the archive and put the folder in your user icons folder (usually `~/.icons/`), then pick the cursor theme with whatever desktop/theme manager you use.
  - Windows: Unpack the archive, right-click 'install.inf', and select 'install'. Right now, not every cursor has a windows equivalent, so when the dialogue box shows up complaining about "File not found", just close it and move on. Finally, go to control-panel -> mouse -> pointers and select "NieR Cursors" as your theme.
 
 ## F.A.Q.
