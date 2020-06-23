@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import argparse
 import struct
+import sys
 
 
 def icotocur(buff, hotx, hoty):
@@ -19,18 +20,11 @@ def icotocur(buff, hotx, hoty):
 
 def main():
     parser = argparse.ArgumentParser(description="Convert ico files to cur files.")
-    parser.add_argument('input', type=str)
     parser.add_argument("hotx", type=float, help="0.0 <= hotx <= 1.0")
     parser.add_argument("hoty", type=float, help="0.0 <= hoty <= 1.0")
-    parser.add_argument('output', type=str)
     args = parser.parse_args()
-
-    infile = open(args.input, mode='rb')
-    outfile = open(args.output, mode='wb')
-
-    outfile.write(icotocur(infile.read(), args.hotx, args.hoty))
-    infile.close()
-    outfile.close()
+    # Read buffer from stdin and write to stdout
+    sys.stdout.buffer.write(icotocur(sys.stdin.buffer.read(), args.hotx, args.hoty))
 
 
 if __name__ == "__main__":

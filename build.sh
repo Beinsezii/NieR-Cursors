@@ -71,11 +71,8 @@ genblend(){
     cd ../../../
 }
 
-# argv1: scene name
-# argv2: hotspot % X (0.0-1.0)
-# argv3: hotspot % Y (0.0-1.0)
-# argv4: framerate
-# argv5: windows cursor name
+# argv1: framerate
+# argv+: scenes
 genpreviews(){
     local output=./previews/
     mkifnot $output
@@ -96,36 +93,27 @@ genpreviews(){
     wait
 }
 
-
+# argv1: scene name
+# argv2: hotspot % X (0.0-1.0)
+# argv3: hotspot % Y (0.0-1.0)
+# argv4: framerate
+# argv5: windows cursor name
 genwindows(){
     local folder=./working/$1/
     local rawfolder=${folder}frames/
     local sizesfolder=${folder}sizes/
 
     local frames=(${rawfolder}*.png)
-    local icofolder=${folder}icos/
     local curfolder=icons/nier_cursors_windows/
-    local format=.cur
+
+    mkifnot $curfolder
+
     if [ ${#frames[@]} -gt 1 ]
     then
-        local format=.ani
-    fi
-
-    mkifnot $curfolder $icofolder
-    rm ${icofolder}/*.ico
-
-    for f in $frames
-    do
-        f=${f##*/}
-        magick convert ${sizesfolder}/*${f} ${icofolder}/${f%.png}.ico
-    done
-
-    if [ $format = '.cur' ]
-    then
-        ./icotocur.py ${icofolder}/*.ico $2 $3 ${curfolder}/${5}.cur
-    else
         echo .ani TODO. Falling back to .cur
-        ./icotocur.py ${icofolder}/0001.ico $2 $3 ${curfolder}/${5}.cur
+        magick convert ${sizesfolder}/*${frames[0]##*/} ico:- | ./icotocur.py $2 $3 > ${curfolder}/${5}.cur
+    else
+        magick convert ${sizesfolder}/*${frames[0]##*/} ico:- | ./icotocur.py $2 $3 > ${curfolder}/${5}.cur
     fi
 }
 
