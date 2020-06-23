@@ -198,7 +198,7 @@ genwindows Cursor_Error $cc $cc 8 unavailable &
 genwindows Loading_Circle 0.5 0.5 60 busy &
 genwindows Cursor_Loading $cc $cc 60 working-in-background &
 genwindows Selector 0.5 0.5 1 text-select &
-genwindows Arrows_Full 0.5 0.5 1 move &
+genwindows Arrows_Dot_Full 0.5 0.5 1 move &
 genwindows Arrows_Dot_ULLR 0.5 0.5 1 diagonal-resize-1 &
 genwindows Arrows_Dot_LLUR 0.5 0.5 1 diagonal-resize-2 &
 genwindows Arrows_Dot_UD 0.5 0.5 1 vertical-resize &

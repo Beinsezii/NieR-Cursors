@@ -1,6 +1,5 @@
 # NieR Style Cursors
-Uses Blender 2.82+, xcursorgen, imagemagick, and of course common bash tools like `bc`. Building for windows also needs Python 3.
-*Possibly* runs on blender versions as old as 2.80. Windows builds currently don't support animation.
+Uses Blender 2.83, xcursorgen, imagemagick, and of course common bash tools like `bc`. Building for windows also needs Python 3.
 
 Now has prebuilt release archives bundled!
 ## Preview Images
