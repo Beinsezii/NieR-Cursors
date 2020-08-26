@@ -185,7 +185,7 @@ genblend Cursor_Error $cc $cc 8 crossed_circle not-allowed 03b6e0fcb3499374a867c
 
 wait
 
-genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair Targeter Cursor_Help
+genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair Targeter
 genpreviews 8 Cursor_Error
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
