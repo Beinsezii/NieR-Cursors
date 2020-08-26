@@ -175,6 +175,8 @@ genblend Crosshair 0.5 0.5 1 cross crosshair cross_reverse diamond_cross \
     tcross cell &
 genblend Targeter 0.5 0.5675 1 dotbox dot_box_mask icon target &
 
+genblend Cursor_Help $cc $cc 1 question_arrow help left_ptr_help 5c6cd98b3f3ebcb1f9c7f1c204630408 d9ce0ab605698f320427677b458ad60b &
+
 wait
 
 genblend Cursor_Loading $cc $cc 60 left_ptr_watch progress 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 &
@@ -183,7 +185,7 @@ genblend Cursor_Error $cc $cc 8 crossed_circle not-allowed 03b6e0fcb3499374a867c
 
 wait
 
-genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair Targeter
+genpreviews 60 Cursor_UL Selector Loading_Circle Arrows_Dot_UD Hand_Point Crosshair Targeter Cursor_Help
 genpreviews 8 Cursor_Error
 
 # inherits Adwaita since that's standard-issue and should be a good fallback
@@ -205,6 +207,7 @@ genwindows Arrows_Dot_UD 0.5 0.5 1 vertical-resize &
 genwindows Arrows_Dot_LR 0.5 0.5 1 horizontal-resize &
 genwindows Hand_Point 0.375 0.1 1 link-select &
 genwindows Crosshair 0.5 0.5 1 precision-select &
+genwindows Cursor_Help $cc $cc 1 help-select &
 
 echo '; Incomplete. Based on Capitaine Cursors install.inf
 
