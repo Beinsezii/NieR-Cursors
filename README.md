@@ -23,10 +23,10 @@ Download the [release](https://github.com/Beinsezii/NieR-Cursors/releases) archi
  4. A folder will appear called 'icons' that has the Linux and Windows themes inside.
 
 ## State
- + Cursors for every type of mouse event I come across
- + Many sizes ensure crisp HiDPI
- - Windows is missing animations
- - No handwriting/pen cursor
+ - \+ Cursors for every type of mouse event I come across
+ - \+ Many sizes ensure crisp HiDPI
+ - \- Windows is missing animations
+ - \- No handwriting/pen cursor
 
 ## F.A.Q.
 Question|Answer
