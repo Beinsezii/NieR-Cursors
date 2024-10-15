@@ -14,7 +14,7 @@ Adwaita is a fallback for those not included. This can be changed in the "index.
 ## Installing
 Download the [release](https://github.com/Beinsezii/NieR-Cursors/releases) archive for your operating system
  - Linux: Unpack the archive and put the folder in your user icons folder (usually `~/.icons/`), then pick the cursor theme with whatever desktop/theme manager you use.
-     - Arch Linux has an [AUR package](https://aur.archlinux.org/packages/nier-cursors-bin) available to install the cursors system wide.
+     - Arch Linux has a 3rd-party [AUR package](https://aur.archlinux.org/packages/nier-cursors-bin) available to install the cursors system wide.
  - Windows: Unzip the archive somewhere then right-click 'install.inf' and select 'install'. Right now, not every cursor has a windows equivalent, so when the dialogue box shows up complaining about "File not found", just close it and move on. Finally, go to control-panel -> mouse -> pointers and select "NieR Cursors" as your theme.
 
 ## Building From Source
